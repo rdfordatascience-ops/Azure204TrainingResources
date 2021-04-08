@@ -1,0 +1,67 @@
+PS C:\Program Files\PowerShell\7> Install-Module -Name Az -AllowClobber -force
+
+PS C:\Program Files\PowerShell\7> Get-Module -Name Az -ListAvailable
+
+    Directory: C:\Users\Rakeshkumar\Documents\PowerShell\Modules
+
+ModuleType Version    PreRelease Name                                PSEdition ExportedCommands
+---------- -------    ---------- ----                                --------- ----------------
+Script     5.7.0                 Az                                  Core,Desk
+
+PS C:\Program Files\PowerShell\7> connect-azaccount
+WARNING: Both Az and AzureRM modules were detected on this machine. Az and AzureRM modules cannot be imported in the same session or used in the same script or runbook. If you are running PowerShell in an environment you control you can use the 'Uninstall-AzureRm' cmdlet to remove all AzureRm modules from your machine. If you are running in Azure Automation, take care that none of your runbooks import both Az and AzureRM modules. More information can be found here: https://aka.ms/azps-migration-guide
+
+Account                      SubscriptionName TenantId                             Environment
+-------                      ---------------- --------                             -----------
+rakeshkumardesai@outlook.com Free Trial       2f3a0102-9aef-4e37-88a1-a765844e8396 AzureCloud
+
+PS C:\Program Files\PowerShell\7> get-azvm                                                                                                                                       PS C:\Program Files\PowerShell\7> new-azresourcegroup -name powershellgroup -location esatus                                                                                     New-AzResourceGroup: The provided location 'esatus' is not available for resource group. List of available regions is 'centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus,southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest,brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia,canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth,francecentral,southafricanorth,uaenorth,australiacentral,switzerlandnorth,germanywestcentral,norwayeast,jioindiawest,australiacentral2'.                                                                                                                                                                StatusCode: 400                                                                                                                                                                  ReasonPhrase: Bad Request                                                                                                                                                        OperationID : e43a9a7c-0f92-4cfa-b1f9-bef6a3de8957                                                                                                                               PS C:\Program Files\PowerShell\7> new-azresourcegroup -name powershellgroup -location eastus                                                                                                                                                                                                                                                                      ResourceGroupName : powershellgroup                                                                                                                                              Location          : eastus                                                                                                                                                       ProvisioningState : Succeeded                                                                                                                                                    Tags              :                                                                                                                                                              ResourceId        : /subscriptions/fe15dc29-81da-4200-a630-8dc1a241a2c7/resourceGroups/powershellgroup                                                                                                                                                                                                                                                                                                                                                                                                                                             PS C:\Program Files\PowerShell\7> new-azvm -resourcegroupname powershellgroup -name aznewvm -location eastus -virtualnetworkname "mynewnet" -Subnetname "default" -PublicIpAddressName "mypublicip" -SecurityGroupName "defaultsecurity" -OpenPorts 80,3389                                                                                                                                                                                                                                                                                        cmdlet New-AzVM at command pipeline position 1                                                                                                                                   Supply values for the following parameters:
+Credential
+User: rdtestuser
+Password for user rdtestuser: ************
+
+
+
+ResourceGroupName        : powershellgroup
+Id                       : /subscriptions/fe15dc29-81da-4200-a630-8dc1a241a2c7/resourceGroups/powershellgroup/providers/Microsoft.Compute/virtualMachines/aznewvm
+VmId                     : 80018402-9d37-49cb-be45-f192e49db1b3
+Name                     : aznewvm
+Type                     : Microsoft.Compute/virtualMachines
+Location                 : eastus
+Tags                     : {}
+HardwareProfile          : {VmSize}
+NetworkProfile           : {NetworkInterfaces}
+OSProfile                : {ComputerName, AdminUsername, WindowsConfiguration, Secrets, AllowExtensionOperations, RequireGuestProvisionSignal}
+ProvisioningState        : Succeeded
+StorageProfile           : {ImageReference, OsDisk, DataDisks}
+FullyQualifiedDomainName : aznewvm-5965f8.eastus.cloudapp.azure.com
+
+
+PS C:\Program Files\PowerShell\7> Stop-AzVM -Name "aznewvm" -ResourceGroupName "powershellgroup"
+
+Virtual machine stopping operation
+This cmdlet will stop the specified virtual machine. Do you want to continue?
+[Y] Yes  [N] No  [S] Suspend  [?] Help (default is "Y"): y
+
+OperationId : 66e72389-26ff-4726-bb6a-86226bb170f9
+Status      : Succeeded
+StartTime   : 07-04-2021 23:23:59
+EndTime     : 07-04-2021 23:24:51
+Error       :
+
+
+PS C:\Program Files\PowerShell\7> Remove-AzResource -ResourceGroupName "powershellgroup"
+
+cmdlet Remove-AzResource at command pipeline position 1
+Supply values for the following parameters:
+(Type !? for Help.)
+ResourceName: y
+ResourceType:
+Remove-AzResource: Cannot validate argument on parameter 'ResourceType'. The argument is null or empty. Provide an argument that is not null or empty, and then try the command again.
+PS C:\Program Files\PowerShell\7> Remove-AzResource -Name "powershellgroup"
+Remove-AzResource: Parameter set cannot be resolved using the specified named parameters. One or more parameters issued cannot be used together or an insufficient number of parameters were provided.
+PS C:\Program Files\PowerShell\7> Remove-AzResourceGroup -Name "powershellgroup"
+
+Confirm
+Are you sure you want to remove resource group 'powershellgroup'
+[Y] Yes  [N] No  [S] Suspend  [?] Help (default is "Y"): Y
