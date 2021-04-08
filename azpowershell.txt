@@ -65,3 +65,48 @@ PS C:\Program Files\PowerShell\7> Remove-AzResourceGroup -Name "powershellgroup"
 Confirm
 Are you sure you want to remove resource group 'powershellgroup'
 [Y] Yes  [N] No  [S] Suspend  [?] Help (default is "Y"): Y
+
+
+// command to publish app service
+
+PS C:\Users\Rakeshkumar> New-AzResourceGroup -name "powershellwebapp" -Location "eastus"
+
+ResourceGroupName : powershellwebapp
+Location          : eastus
+ProvisioningState : Succeeded
+Tags              :
+ResourceId        : /subscriptions/fe15dc29-81da-4200-a630-8dc1a241a2c7/resourceGroups/powershellwebapp
+
+
+PS C:\Users\Rakeshkumar> New-AzAppServicePlan -ResourceGroupName "powershellwebapp" -Name "aznewsp123" -Location "eastus" -Tier "Free"
+
+AdminSiteName             :
+WorkerTierName            :
+Status                    : Ready
+Subscription              : fe15dc29-81da-4200-a630-8dc1a241a2c7
+HostingEnvironmentProfile :
+MaximumNumberOfWorkers    : 0
+GeoRegion                 : East US
+PerSiteScaling            : False
+MaximumElasticWorkerCount :
+NumberOfSites             : 0
+IsSpot                    : False                                                                                       SpotExpirationTime        :                                                                                             FreeOfferExpirationTime   :                                                                                             ResourceGroup             : powershellwebapp                                                                            Reserved                  : False                                                                                       IsXenon                   : False                                                                                       HyperV                    :                                                                                             TargetWorkerCount         : 0                                                                                           TargetWorkerSizeId        : 0                                                                                           ProvisioningState         : Succeeded                                                                                   Sku                       : Microsoft.Azure.Management.WebSites.Models.SkuDescription                                   Id                        : /subscriptions/fe15dc29-81da-4200-a630-8dc1a241a2c7/resourceGroups/powershellwebapp/provide                             rs/Microsoft.Web/serverfarms/aznewsp123                                                     Name                      : aznewsp123                                                                                  Kind                      : app                                                                                         Location                  : eastus                                                                                      Type                      : Microsoft.Web/serverfarms                                                                   Tags                      :                                                                                                                                                                                                                                                                                                                                             PS C:\Users\Rakeshkumar> New-AzWebApp -ResourceGroupName "powershellwebapp" -Name "newrdwebapp" -Location "eastus" -AppServicePlan "aznewsp123"                                                                                                                                                                                                                         AzureStoragePath            :                                                                                           GitRemoteName               :                                                                                           GitRemoteUri                :                                                                                           GitRemoteUsername           :                                                                                           GitRemotePassword           :                                                                                           AzureStorageAccounts        :                                                                                           State                       : Running                                                                                   HostNames                   : {newrdwebapp.azurewebsites.net}                                                           RepositorySiteName          : newrdwebapp                                                                               UsageState                  : Normal                                                                                    Enabled                     : True                                                                                      EnabledHostNames            : {newrdwebapp.azurewebsites.net, newrdwebapp.scm.azurewebsites.net}                        AvailabilityState           : Normal                                                                                    HostNameSslStates           : {newrdwebapp.azurewebsites.net, newrdwebapp.scm.azurewebsites.net}                        ServerFarmId                : /subscriptions/fe15dc29-81da-4200-a630-8dc1a241a2c7/resourceGroups/powershellwebapp/provi                               ders/Microsoft.Web/serverfarms/aznewsp123                                                 Reserved                    : False                                                                                     IsXenon                     : False                                                                                     HyperV                      :                                                                                           LastModifiedTimeUtc         : 08-04-2021 18:36:27                                                                       SiteConfig                  : Microsoft.Azure.Management.WebSites.Models.SiteConfig                                     TrafficManagerHostNames     :                                                                                           ScmSiteAlsoStopped          : False                                                                                     TargetSwapSlot              :                                                                                           HostingEnvironmentProfile   :                                                                                           ClientAffinityEnabled       : True                                                                                      ClientCertEnabled           : False                                                                                     ClientCertMode              :                                                                                           ClientCertExclusionPaths    :                                                                                           HostNamesDisabled           : False                                                                                     CustomDomainVerificationId  :                                                                                           OutboundIpAddresses         : 52.150.53.221,52.154.64.236,52.154.65.178,52.147.212.86,52.154.66.92,52.188.41.146,20.49.                               104.31                                                                                    PossibleOutboundIpAddresses : 52.150.53.221,52.154.64.236,52.154.65.178,52.147.212.86,52.154.66.92,52.188.41.146,52.188                               .42.23,52.142.18.177,52.142.18.40,52.149.202.179,52.154.66.123,52.154.69.195,52.154.70.71                               ,52.154.70.135,52.186.99.104,52.186.101.205,52.142.16.201,52.186.102.198,52.147.209.102,5                               2.149.204.214,52.186.102.230,52.147.209.166,52.147.210.37,52.147.215.140,52.149.206.164,5                               2.190.40.233,52.188.42.100,52.190.43.22,52.224.24.232,52.224.26.145,20.49.104.31          ContainerSize               : 0
+DailyMemoryTimeQuota        : 0
+SuspendedTill               :
+MaxNumberOfWorkers          :
+CloningInfo                 :
+ResourceGroup               : powershellwebapp
+IsDefaultContainer          :
+DefaultHostName             : newrdwebapp.azurewebsites.net
+SlotSwapStatus              :
+HttpsOnly                   : False
+RedundancyMode              :
+InProgressOperationId       :
+Identity                    :
+Id                          : /subscriptions/fe15dc29-81da-4200-a630-8dc1a241a2c7/resourceGroups/powershellwebapp/provi
+                              ders/Microsoft.Web/sites/newrdwebapp
+Name                        : newrdwebapp
+Kind                        : app
+Location                    : eastus
+Type                        : Microsoft.Web/sites
+Tags                        :
